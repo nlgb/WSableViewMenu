@@ -26,8 +26,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.tableView.sectionFooterHeight = 60;
-    self.tableView.sectionHeaderHeight = 60;
+//    self.tableView.sectionFooterHeight = 60;
+//    self.tableView.sectionHeaderHeight = 60;
     self.tableView.rowHeight = 40;
     
     self.tableView.tableFooterView = [[UIView alloc] init];
@@ -36,7 +36,7 @@
     _rowInSectionArray = [NSMutableArray arrayWithObjects:@"4",@"2",@"5",@"6", nil];//每个分区中cell的个数
     _selectedArray = [NSMutableArray arrayWithObjects:@"0",@"0",@"0",@"0", nil];//这个用于判断展开还是缩回当前section的cell
     
-
+    self.tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
 
 }
 
@@ -73,7 +73,7 @@
 {
     
     //每个section上面有一个button,给button一个tag值,用于在点击事件中改变_selectedArray[button.tag - 1000]的值
-    UIView *sectionView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, HEADER_HEIGHT)];
+    UIView *sectionView = [[UIView alloc] init];
     sectionView.backgroundColor = [UIColor cyanColor];
     UIButton *sectionButton = [UIButton buttonWithType:UIButtonTypeCustom];
     sectionButton.frame = sectionView.frame;
@@ -87,6 +87,11 @@
     [sectionView addSubview:lineView];
     
     return sectionView;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 20.0;
 }
 
 #pragma mark button点击方法

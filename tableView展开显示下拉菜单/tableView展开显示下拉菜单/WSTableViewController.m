@@ -29,10 +29,10 @@
     _rowInSectionArray = [NSMutableArray arrayWithObjects:@"4",@"2",@"5",@"6", nil];//每个分区中cell的个数
     _selectedArray = [NSMutableArray arrayWithObjects:@"0",@"0",@"0",@"0", nil];//这个用于判断展开还是缩回当前section的cell
     
-    self.tableView.sectionHeaderHeight = HEADER_HEIGHT;
-    self.tableView.sectionFooterHeight = FOOTER_HEIGHT;
+//    self.tableView.sectionHeaderHeight = HEADER_HEIGHT;
+//    self.tableView.sectionFooterHeight = FOOTER_HEIGHT;
     
-//    self.tableView.contentInset = UIEdgeInsetsMake(100, 0, 0, 0);
+    self.tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
 
 }
 
@@ -70,15 +70,22 @@
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     //每个section上面有一个button,给button一个tag值,用于在点击事件中改变_selectedArray[button.tag   ]的值
-    UIView *sectionView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, HEADER_HEIGHT)];
-    sectionView.backgroundColor = [UIColor cyanColor];
+//    UIView *sectionView = [[UIView alloc]init];
+//    sectionView.backgroundColor = [UIColor cyanColor];
     UIButton *sectionButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    sectionButton.frame = sectionView.frame;
+    sectionButton.backgroundColor = [UIColor cyanColor];
+//    sectionButton.frame = sectionView.frame;
+    sectionButton.titleLabel.textAlignment = NSTextAlignmentLeft;
     [sectionButton setTitle:[_sectionArray objectAtIndex:section] forState:UIControlStateNormal];
     [sectionButton addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
     sectionButton.tag = section;
-    [sectionView addSubview:sectionButton];
-    return sectionView;
+//    [sectionView addSubview:sectionButton];
+    return sectionButton;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 20.0;
 }
 #pragma mark button点击方法
 -(void)buttonAction:(UIButton *)button
